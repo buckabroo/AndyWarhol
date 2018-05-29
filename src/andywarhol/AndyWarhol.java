@@ -16,15 +16,13 @@ public class AndyWarhol {
             inputImage = ImageIO.read(startImage);
             outputLocation = startImage.getPath().substring(0, startImage.getPath().lastIndexOf("\\")) + "\\" + outputFileName;
             outputLocation = outputLocation.replace("\\", "\\\\");
-
-            System.out.println(outputLocation);
-            main(new String[]{});
+            processAndCreateNewImage();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void processAndCreateNewImage() throws IOException {
         outputImage = new BufferedImage(inputImage.getWidth() * 2, 2 * inputImage.getHeight(), BufferedImage.TYPE_INT_RGB);
 
         for(int y = 0; y < inputImage.getHeight();  y++)
