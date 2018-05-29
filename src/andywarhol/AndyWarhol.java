@@ -7,13 +7,26 @@ import javax.imageio.ImageIO;
 
 public class AndyWarhol {
 
+    private static BufferedImage inputImage;
+    private static BufferedImage outputImage;
+    private static String outputLocation;
+
+    AndyWarhol(File startImage, String outputFileName) {
+        try {
+            inputImage = ImageIO.read(startImage);
+            outputLocation = startImage.getPath().substring(0, startImage.getPath().lastIndexOf("\\")) + "\\" + outputFileName;
+            outputLocation = outputLocation.replace("\\", "\\\\");
+
+            System.out.println(outputLocation);
+            main(new String[]{});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) throws IOException {
-        
-        
-        BufferedImage inputImage = ImageIO.read(new File("C:\\Users\\emmab\\Desktop\\newPhoto2.png"));
-        
-        BufferedImage outputImage = new BufferedImage(inputImage.getWidth() * 2, 2 * inputImage.getHeight(), BufferedImage.TYPE_INT_RGB);
-        
+        outputImage = new BufferedImage(inputImage.getWidth() * 2, 2 * inputImage.getHeight(), BufferedImage.TYPE_INT_RGB);
+
         for(int y = 0; y < inputImage.getHeight();  y++)
         {
             for(int x = 0; x < inputImage.getWidth(); x++)
@@ -63,7 +76,6 @@ public class AndyWarhol {
                 outputImage.setRGB(x + inputImage.getWidth(), y + inputImage.getHeight(), finalPixel);
             }
         }
-        ImageIO.write(outputImage, "PNG", new File("C:\\Users\\emmab\\Desktop\\newPhoto3.png") );
+        ImageIO.write(outputImage, "PNG", new File(outputLocation + ".png") );
     }
-    
 }
